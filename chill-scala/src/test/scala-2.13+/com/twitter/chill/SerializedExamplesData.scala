@@ -147,7 +147,7 @@ object SerializedExamplesData {
     //   _root_.java.util.Collections.unmodifiableSortedSet[Int](_root_.java.util.Collections.emptySortedSet())),
     // because we get an exception in the test with the root cause:
     // com.twitter.chill.Instantiators$ can not access a member of class java.util.Collections$UnmodifiableNavigableSet$EmptyNavigableSet with modifiers "public"
-    // 91 -> com.esotericsoftware.kryo.kryo5.serializers.ClosureSerializer$Closure
+    // 91 -> com.esotericsoftware.kryo.serializers.ClosureSerializer$Closure
     92 -> ("XgEGAAQEAgI=" -> collection.immutable.Range(1, 3)),
     93 -> ("XwECgA==" -> Array(Byte.MinValue)),
     94 -> ("YAEC/38=" -> Array(Short.MaxValue)),
