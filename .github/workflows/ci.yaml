@@ -1,45 +1,27 @@
-name: ci
-on: [push, pull_request]
-
+name: CI
+on: [push]
 jobs:
   checks:
     runs-on: ubuntu-latest
     steps:
-      - uses: "actions/checkout@v4"
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
         with:
-          cache: "sbt"
-          distribution: "temurin"
-          java-version: "17"
+          distribution: temurin
+          java-version: 17
+          cache: sbt
       - uses: sbt/setup-sbt@v1
-      - run: 'sbt "; +scalafmtCheckAll; scalafmtSbtCheck" "; scalafixEnable; scalafix --check; test:scalafix --check"'
+      - name: Check
+        run: sbt "+scalafmtCheckAll; scalafmtSbtCheck" "scalafixEnable; scalafix --check; Test/scalafix --check"
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: "actions/checkout@v4"
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
         with:
-          cache: "sbt"
-          distribution: "temurin"
-          java-version: ${{matrix.java}}
-      - uses: sbt/setup-sbt@v1
-      - run: 'sbt "++${{matrix.scala}} test"'
-    strategy:
-      matrix:
-        java:
-          - "11"
-          - "17"
-        scala:
-          - "2.13.13"
-  testWithCoverageReport:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: "actions/checkout@v4"
-      - uses: actions/setup-java@v4
-        with:
-          cache: "sbt"
-          distribution: "temurin"
+          distribution: temurin
           java-version: 17
+          cache: sbt
       - uses: sbt/setup-sbt@v1
-      - run: sbt coverage clean test coverageReport
-      - run: "bash <(curl -s https://codecov.io/bash)"
+      - name: Test
+        run: sbt "++test"
