@@ -10,8 +10,8 @@ def scalaVersionSpecificFolders(srcBaseDir: java.io.File, scalaVersion: String):
 
 val sharedSettings = Seq(
   organization := "pl.touk",
-  organizationName := "TouK",
-  organizationHomepage := Some(url("https://touk.pl/")),
+  organizationName := "Nussknacker",
+  organizationHomepage := Some(url("https://nussknacker.io")),
   licenses := List(License.Apache2),
   homepage := Some(url("https://github.com/TouK/chill")),
   scalaVersion := "2.13.18",
@@ -118,8 +118,15 @@ inThisBuild(
     },
     Test / publishArtifact := false,
     scmInfo := Some(ScmInfo(url("https://github.com/TouK/chill"), "scm:git@github.com:TouK/chill.git")),
-    developers := List(
-      Developer(id = "TouK", name = "TouK", email = "", url = url("https://touk.pl"))
+    pomExtra := List(
+      <developers>
+        <developer>
+          <name>Nussknacker Team</name>
+          <email>info@nussknacker.io</email>
+          <organization>Nussknacker</organization>
+          <organizationUrl>https://nussknacker.io</organizationUrl>
+        </developer>
+      </developers>
     )
   )
 )
